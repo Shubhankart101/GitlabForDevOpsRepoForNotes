@@ -1,0 +1,7 @@
+stages: [test]
+unit:
+  image: python:3.12-slim
+  script: ["pytest --junitxml=report.xml"]
+  artifacts:
+    reports:
+      junit: report.xml

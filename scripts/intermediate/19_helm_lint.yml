@@ -1,0 +1,4 @@
+stages: [validate]
+helm_lint:
+  image: alpine/helm:3.16.0
+  script: ["helm lint helm/devops-app"]

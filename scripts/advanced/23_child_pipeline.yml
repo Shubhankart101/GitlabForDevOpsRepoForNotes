@@ -1,0 +1,14 @@
+stages: [generate]
+generate:
+  image: alpine:3.20
+  script: ["printf 'deploy:\n  script: echo deploy\n' > generated.yml"]
+  artifacts:
+    paths: [generated.yml]
+trigger_child:
+  stage: generate
+  needs: [generate]
+  trigger:
+    include:
+      - artifact: generated.yml
+        job: generate
+    strategy: depend

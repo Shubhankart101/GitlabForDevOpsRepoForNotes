@@ -1,0 +1,6 @@
+stages: [observe]
+metrics:
+  image: curlimages/curl:8.10.1
+  script:
+    - curl --fail-with-body -X POST "$METRICS_ENDPOINT" -d "pipeline=$CI_PIPELINE_ID&status=$CI_PIPELINE_STATUS"
+  when: always

@@ -1,0 +1,7 @@
+stages: [build]
+build_report:
+  stage: build
+  image: alpine:3.20
+  script: ["date > build.txt"]
+  artifacts:
+    paths: [build.txt]

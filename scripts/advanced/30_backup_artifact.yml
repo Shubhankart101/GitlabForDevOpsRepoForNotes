@@ -1,0 +1,8 @@
+stages: [backup]
+backup:
+  image: alpine:3.20
+  script:
+    - tar -czf devtrack-$CI_PIPELINE_ID.tar.gz config/
+  artifacts:
+    expire_in: 30 days
+    paths: [devtrack-$CI_PIPELINE_ID.tar.gz]

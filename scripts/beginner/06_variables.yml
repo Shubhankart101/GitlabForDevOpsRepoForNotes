@@ -1,0 +1,6 @@
+stages: [test]
+show_context:
+  variables:
+    APP_ENV: development
+  script:
+    - echo "Branch=$CI_COMMIT_REF_NAME Environment=$APP_ENV"

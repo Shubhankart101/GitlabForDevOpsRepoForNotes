@@ -1,0 +1,5 @@
+stages: [deploy]
+deploy:
+  script: ["./deploy.sh"]
+  after_script:
+    - if [ "$CI_JOB_STATUS" = failed ]; then ./notify.sh failure; fi

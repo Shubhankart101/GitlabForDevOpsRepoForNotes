@@ -1,0 +1,15 @@
+stages: [deploy]
+review:
+  stage: deploy
+  script: ["echo create review app"]
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://$CI_COMMIT_REF_SLUG.review.example.test
+    on_stop: stop_review
+stop_review:
+  stage: deploy
+  script: ["echo destroy review app"]
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  when: manual

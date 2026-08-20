@@ -1,0 +1,5 @@
+stages: [test]
+main_only:
+  script: ["echo main branch"]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

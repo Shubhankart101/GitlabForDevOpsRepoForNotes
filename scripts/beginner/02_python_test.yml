@@ -1,0 +1,6 @@
+stages: [test]
+unit_test:
+  image: python:3.12-slim
+  script:
+    - python --version
+    - python -m compileall .

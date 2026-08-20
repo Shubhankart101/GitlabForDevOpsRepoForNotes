@@ -1,0 +1,5 @@
+stages: [test]
+echo_job:
+  stage: test
+  image: alpine:3.20
+  script: ["echo Hello GitLab"]

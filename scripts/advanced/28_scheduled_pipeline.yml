@@ -1,0 +1,5 @@
+stages: [maintenance]
+nightly:
+  script: ["./scripts/nightly-maintenance.sh"]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'

@@ -10,6 +10,7 @@ Practical GitLab notes and project-oriented CI/CD use cases for cloud and on-pre
 
 ## Code examples and interview preparation
 
+- [34-script library](scripts/README.md)
 - [Azure pipeline example](examples/azure/.gitlab-ci.yml)
 - [AWS pipeline example](examples/aws/.gitlab-ci.yml)
 - [On-premises pipeline example](examples/on-premises/.gitlab-ci.yml)

@@ -1,0 +1,9 @@
+stages: [validate]
+terraform_plan:
+  image: hashicorp/terraform:1.9
+  script:
+    - terraform init -backend=false
+    - terraform validate
+    - terraform plan -out=plan.tfplan
+  artifacts:
+    paths: [plan.tfplan]

@@ -1,0 +1,6 @@
+stages: [trigger]
+trigger_platform:
+  trigger:
+    project: platform/infrastructure
+    branch: main
+    strategy: depend

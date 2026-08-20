@@ -1,0 +1,7 @@
+stages: [test]
+cache_dependencies:
+  image: alpine:3.20
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths: [.cache/]
+  script: ["mkdir -p .cache", "date > .cache/result"]

@@ -1,0 +1,7 @@
+stages: [rollback]
+rollback:
+  script: ["./rollback.sh $PREVIOUS_VERSION"]
+  when: manual
+  environment:
+    name: production
+    action: rollback

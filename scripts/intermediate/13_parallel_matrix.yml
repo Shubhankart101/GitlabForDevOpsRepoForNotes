@@ -1,0 +1,8 @@
+stages: [test]
+test:
+  parallel:
+    matrix:
+      - PYTHON_VERSION: ['3.11', '3.12']
+        DATABASE: [sqlite, postgres]
+  image: python:$PYTHON_VERSION
+  script: ["echo Testing $PYTHON_VERSION with $DATABASE"]

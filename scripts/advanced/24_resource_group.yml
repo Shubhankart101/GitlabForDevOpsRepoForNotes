@@ -1,0 +1,5 @@
+stages: [deploy]
+production:
+  script: ["./deploy.sh"]
+  resource_group: production
+  environment: production

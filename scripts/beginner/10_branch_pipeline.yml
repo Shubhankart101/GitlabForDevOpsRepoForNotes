@@ -1,0 +1,5 @@
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+stage_job:
+  script: ["echo branch pipeline"]

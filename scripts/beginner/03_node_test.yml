@@ -1,0 +1,6 @@
+stages: [test]
+node_test:
+  image: node:22-alpine
+  script:
+    - npm ci
+    - npm test

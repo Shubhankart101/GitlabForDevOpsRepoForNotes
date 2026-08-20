@@ -1,0 +1,10 @@
+stages: [deploy]
+deploy_azure:
+  image: mcr.microsoft.com/azure-cli:2.64.0
+  id_tokens:
+    AZURE_OIDC_TOKEN:
+      aud: https://management.azure.com/
+  script:
+    - printf '%s' "$AZURE_OIDC_TOKEN" > azure-token
+    - az login --service-principal --username "$AZURE_CLIENT_ID" --tenant "$AZURE_TENANT_ID" --federated-token "$AZURE_OIDC_TOKEN"
+    - az group show --name "$AZURE_RESOURCE_GROUP"

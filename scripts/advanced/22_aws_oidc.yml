@@ -1,0 +1,9 @@
+stages: [deploy]
+deploy_aws:
+  image: amazon/aws-cli:2.17.0
+  id_tokens:
+    AWS_OIDC_TOKEN:
+      aud: sts.amazonaws.com
+  script:
+    - echo "$AWS_OIDC_TOKEN" > web-identity-token
+    - aws sts get-caller-identity
