@@ -130,3 +130,36 @@ This bank contains 120 questions organized by difficulty. Use the pipeline examp
 118. How do you design a regulated production approval workflow?
 119. How do you connect GitLab deployment events to incident management?
 120. Design a secure, reusable, observable GitLab platform for Azure, AWS, and on-premises delivery.
+
+## HackerRank-Style CI/CD Challenges: 121-150
+
+121. Write a pipeline with lint, test, build, and deploy stages.
+122. Store a generated report as an artifact.
+123. Cache Python dependencies with a branch-safe key.
+124. Run deployment only on the default branch.
+125. Add a manual production job with a protected environment.
+126. Build and push an immutable commit-SHA Docker tag.
+127. Test two Python versions and two database engines with a matrix.
+128. Build a DAG so independent tests run in parallel.
+129. Create a review app and manual stop job.
+130. Always upload JUnit test results.
+131. Include SAST and dependency scanning templates.
+132. Include secret detection and fail on a finding.
+133. Add a Helm lint job.
+134. Add a Terraform validate and plan job.
+135. Obtain Azure credentials through OIDC.
+136. Obtain AWS identity through OIDC.
+137. Generate a child pipeline from an artifact.
+138. Wait for an infrastructure project with a multi-project pipeline.
+139. Serialize production deployments with `resource_group`.
+140. Create a canary, smoke-test, and manual promotion flow.
+141. Create a tag-based release job.
+142. Run a job only from a scheduled pipeline.
+143. Block production changes during a deployment freeze.
+144. Add a manual rollback job for a previous artifact.
+145. Send a failure notification from `after_script`.
+146. Publish pipeline duration metrics.
+147. Retain a backup artifact for 30 days.
+148. Protect cloud credentials without plaintext secrets.
+149. Build a reusable YAML component for security gates.
+150. Build a secure pipeline with OIDC, immutable artifacts, canary, rollback, and metrics.
