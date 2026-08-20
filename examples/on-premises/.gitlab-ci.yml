@@ -1,0 +1,32 @@
+stages: [validate, build, deploy]
+
+variables:
+  IMAGE: "$CI_REGISTRY_IMAGE/devtrack:$CI_COMMIT_SHORT_SHA"
+
+validate:
+  stage: validate
+  image: alpine:3.20
+  script:
+    - test -f Dockerfile
+    - echo "On-premises pipeline validation passed"
+
+build:
+  stage: build
+  image: docker:27
+  services: [docker:27-dind]
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password-stdin
+    - docker build --pull -t "$IMAGE" .
+    - docker push "$IMAGE"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+deploy:
+  stage: deploy
+  tags: [on-prem-runner]
+  script:
+    - kubectl config use-context "$KUBE_CONTEXT"
+    - kubectl set image deployment/devtrack web="$IMAGE" --namespace devtrack
+    - kubectl rollout status deployment/devtrack --namespace devtrack
+  environment: production
+  when: manual

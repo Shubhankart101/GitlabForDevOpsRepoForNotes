@@ -1,0 +1,33 @@
+stages: [validate, build, deploy]
+
+variables:
+  IMAGE: "$ACR_LOGIN_SERVER/devtrack:$CI_COMMIT_SHORT_SHA"
+
+validate:
+  stage: validate
+  image: alpine:3.20
+  script:
+    - test -f Dockerfile
+    - echo "Azure pipeline validation passed"
+
+build:
+  stage: build
+  image: docker:27
+  services: [docker:27-dind]
+  script:
+    - echo "$ACR_PASSWORD" | docker login "$ACR_LOGIN_SERVER" --username "$ACR_USERNAME" --password-stdin
+    - docker build --pull -t "$IMAGE" .
+    - docker push "$IMAGE"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+deploy_aks:
+  stage: deploy
+  image: mcr.microsoft.com/azure-cli:2.64.0
+  script:
+    - az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
+    - az aks get-credentials --resource-group "$AKS_RESOURCE_GROUP" --name "$AKS_CLUSTER" --overwrite-existing
+    - kubectl set image deployment/devtrack web="$IMAGE" --namespace devtrack
+    - kubectl rollout status deployment/devtrack --namespace devtrack
+  environment: production
+  when: manual

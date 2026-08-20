@@ -1,0 +1,23 @@
+stages: [lint, package, deploy]
+
+helm_lint:
+  stage: lint
+  image: alpine/helm:3.16.0
+  script:
+    - helm lint helm/devops-app
+
+package_chart:
+  stage: package
+  image: alpine/helm:3.16.0
+  script:
+    - helm package helm/devops-app --destination dist
+  artifacts:
+    paths: [dist/]
+
+deploy_chart:
+  stage: deploy
+  image: alpine/helm:3.16.0
+  script:
+    - helm upgrade --install devtrack helm/devops-app --namespace devtrack --create-namespace --set image.repository="$IMAGE_REPOSITORY" --set image.tag="$CI_COMMIT_SHORT_SHA" --wait --timeout 5m
+  environment: production
+  when: manual
