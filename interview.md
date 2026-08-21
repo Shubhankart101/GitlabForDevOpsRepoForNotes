@@ -1,65 +1,6 @@
-﻿# GitLab DevOps Interview Question Bank
+# GitLab DevOps Interview Question Bank
 
 This bank contains 150 questions organized by difficulty. Use the pipeline examples in `scripts/` and `examples/` to build practical answers.
-
-## Worked Answers
-
-### Beginner: stages and artifacts
-
-**Question:** How do you pass a build result to a later job?
-
-```yaml
-stages: [test, build]
-
-build:
-	stage: build
-	script:
-		- echo "artifact" > build.txt
-	artifacts:
-		paths: [build.txt]
-```
-
-Artifacts are stored by GitLab and made available to later jobs or for download.
-
-### Intermediate: review app
-
-**Question:** How do you create and stop a review environment?
-
-```yaml
-review:
-	script: ["./deploy.sh review"]
-	environment:
-		name: review/$CI_COMMIT_REF_SLUG
-		on_stop: stop_review
-
-stop_review:
-	script: ["./destroy.sh review"]
-	environment:
-		name: review/$CI_COMMIT_REF_SLUG
-		action: stop
-	when: manual
-```
-
-The environment name is isolated per branch and can be manually cleaned up.
-
-### Advanced: canary promotion
-
-**Question:** How do you require a smoke test before production?
-
-```yaml
-verify_canary:
-	stage: verify
-	needs: [deploy_canary]
-	script: ["./smoke-test.sh canary"]
-
-production:
-	needs: [verify_canary]
-	script: ["./deploy.sh production"]
-	when: manual
-	resource_group: production
-```
-
-The production job cannot start until the canary verification succeeds, and the resource group prevents concurrent releases.
 
 ## Beginner: 1-40
 
