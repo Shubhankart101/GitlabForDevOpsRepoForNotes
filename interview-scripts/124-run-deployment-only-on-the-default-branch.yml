@@ -1,0 +1,22 @@
+# Question 124: Run deployment only on the default branch.
+stages: [validate, test, verify]
+
+validate:
+  stage: validate
+  image: alpine:3.20
+  script:
+    - echo "validate question 124"
+    - test -n "$CI_COMMIT_SHA"
+
+test:
+  stage: test
+  needs: [validate]
+  script:
+    - echo "implement the question-specific test"
+    - printf "status=passed\\n"
+
+verify:
+  stage: verify
+  needs: [test]
+  script:
+    - echo "verify output and failure handling"
