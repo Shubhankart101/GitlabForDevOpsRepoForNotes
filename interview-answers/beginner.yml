@@ -1,0 +1,15 @@
+stages: [test, build]
+
+unit_test:
+  stage: test
+  image: alpine:3.20
+  script:
+    - echo "run unit tests"
+
+build:
+  stage: build
+  needs: [unit_test]
+  script:
+    - echo "build artifact"
+  artifacts:
+    paths: [build.txt]

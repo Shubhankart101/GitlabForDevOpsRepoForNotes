@@ -163,3 +163,9 @@ This bank contains 120 questions organized by difficulty. Use the pipeline examp
 148. Protect cloud credentials without plaintext secrets.
 149. Build a reusable YAML component for security gates.
 150. Build a secure pipeline with OIDC, immutable artifacts, canary, rollback, and metrics.
+
+## Executable Answers
+
+- [Beginner answers](interview-answers/beginner.yml): stages, dependencies, and artifacts.
+- [Intermediate answers](interview-answers/intermediate.yml): matrix testing and review apps.
+- [Advanced answers](interview-answers/advanced.yml): canary promotion, smoke tests, and deployment locking.

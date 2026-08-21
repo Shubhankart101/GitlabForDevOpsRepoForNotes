@@ -1,0 +1,19 @@
+stages: [deploy, verify]
+
+deploy_canary:
+  stage: deploy
+  script: ["./deploy.sh canary"]
+  environment: canary
+
+verify_canary:
+  stage: verify
+  needs: [deploy_canary]
+  script: ["./smoke-test.sh canary"]
+
+production:
+  stage: deploy
+  needs: [verify_canary]
+  script: ["./deploy.sh production"]
+  when: manual
+  resource_group: production
+  environment: production
